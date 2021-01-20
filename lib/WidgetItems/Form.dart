@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:chat_app/WidgetItems/Imageselector.dart';
+import 'package:chat_app/repository/Repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -61,8 +62,8 @@ void tryLogin() async{
       if(isSignup  ){ setState(() {
         isLoading=!isLoading;
       });
-      if(userImage!=null){ userData= await FirebaseAuth.instance.createUserWithEmailAndPassword
-        (email: emailController.text, password: passwordController.text);
+      if(userImage!=null){ userData= await Repository()
+          .createUserWithEmailAndPassword(emailController.text,passwordController.text);
       print(userData.user.displayName);
       userData.user.updateProfile(displayName:'leykun',photoURL: '');
       StorageReference ref= FirebaseStorage.instance.ref().child('userImage').child(FirebaseAuth.instance.currentUser.uid+'jpg');

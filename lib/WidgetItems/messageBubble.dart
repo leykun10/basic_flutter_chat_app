@@ -1,3 +1,4 @@
+import 'package:chat_app/repository/Repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class MessageBubble extends StatelessWidget {
           Container(
 
             child: FutureBuilder(
-              future: FirebaseFirestore.instance.collection('users').doc(userId).get(),
+              future: Repository().getUser(userId),
 
               builder: (context, snapshot) {
 
